@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="MatrixHierarchy\DiagonalMatrix.cs" />
     <Compile Include="MatrixChangedEventArgs.cs" />
-    <Compile Include="MatrixExtentions.cs" />
+    <Compile Include="MatrixExtensions.cs" />
     <Compile Include="MatrixHierarchy\SMatrix.cs" />
     <Compile Include="MatrixHierarchy\SquareMatrix.cs" />
     <Compile Include="MatrixVisitor.cs" />
