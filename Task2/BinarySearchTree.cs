@@ -97,6 +97,28 @@ namespace Task2
             }
         }
 
+        public IEnumerable<T> PostOrderTraversal()
+        {
+            return PostOrderTraversal(_root).Select(n => n.Value);
+        }
+
+        private static IEnumerable<Node> PostOrderTraversal(Node node)
+        {
+            if (node == null)
+                yield break;
+
+            foreach (var nodes in PostOrderTraversal(node.Left))
+            {
+                yield return nodes;
+            }
+            foreach (var nodes in PostOrderTraversal(node.Right))
+            {
+                yield return nodes;
+            }
+
+            yield return node;
+        }
+
         private class Node
         {
             public T Value { get; set; }
