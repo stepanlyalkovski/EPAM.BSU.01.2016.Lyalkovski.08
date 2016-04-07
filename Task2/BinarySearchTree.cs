@@ -19,7 +19,7 @@ namespace Task2
             IComparer<T> newComparer = comparer;
 
             if(newComparer == null)
-                if (!(typeof(T).GetInterface("IComparable`1") == null || (typeof(T).GetInterface("IComparable") == null)))
+                if (typeof(T).GetInterface("IComparable`1") == null || (typeof(T).GetInterface("IComparable") == null))
                     throw new ArgumentException();
                 else
                 {
@@ -33,15 +33,19 @@ namespace Task2
         {
             Node node = new Node(element);
                      
-            AddNode(ref node, ref _root);    
+            AddNode(node, _root);    
 
         }
 
-        private void AddNode(ref Node node, ref Node root)
+        private void AddNode(Node node, Node root)
         {
-            
+
             if (root == null)
+            {
                 _root = node;
+                return;
+            }
+
 
             while (root != null)
             {
@@ -50,21 +54,24 @@ namespace Task2
                 if (cmp > 0)
                 {
                     if (root.Right == null)
+                    {
                         root.Right = node;
+                        return;
+                    }
 
                     root = root.Right;
                 }
-
                 else if (cmp < 0)
                 {
                     if (root.Left == null)
+                    {
                         root.Left = node;
-
+                        return;
+                    }
                     root = root.Left;
                 }
 
             }
-         
         }
 
 
