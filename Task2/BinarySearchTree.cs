@@ -9,7 +9,6 @@ namespace Task2
 {
     public class BinarySearchTree<T>
     {
-        public int Length { get; set; }
         public IComparer<T> Comparer { get; private set; }
         private Node _root;
         public BinarySearchTree() : this(null) { }
@@ -74,9 +73,9 @@ namespace Task2
             }
         }
 
-        public IEnumerable<T> OrderTraversal()
+        public IEnumerable<T> PreOrderTraversal()
         {
-            return OrderTraversal(_root).Select(n => n.Value);
+            return PreOrderTraversal(_root).Select(n => n.Value);
         }
 
         public IEnumerable<T> PostOrderTraversal()
@@ -89,19 +88,19 @@ namespace Task2
             return InOrderTraversal(_root).Select(n => n.Value);
         }
 
-        private static IEnumerable<Node> OrderTraversal(Node node)
+        private static IEnumerable<Node> PreOrderTraversal(Node node)
         {
             if (node == null)
                 yield break;
 
             yield return node;
 
-            foreach (var nodes in OrderTraversal(node.Left))
+            foreach (var nodes in PreOrderTraversal(node.Left))
             {
                 yield return nodes;
             }
 
-            foreach (var nodes in OrderTraversal(node.Right))
+            foreach (var nodes in PreOrderTraversal(node.Right))
             {
                 yield return nodes;
             }
