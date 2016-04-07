@@ -46,6 +46,11 @@ namespace Task1
             return true;
         }
 
+        protected SquareMatrix(int order)
+        {
+            Order = order;
+        }
+
         protected SquareMatrix(T[][] matrix)
         {
             if (matrix == null)
@@ -55,6 +60,31 @@ namespace Task1
                 throw new ArgumentException(nameof(matrix));
 
             Order = matrix.Length;
+        }
+
+        public abstract void Accept(IMatrixVisitor<T> visitor);
+
+        public static SquareMatrix<T> operator +(SquareMatrix<T> arg1, SquareMatrix<T> arg2)
+        {
+           return  arg1.Sum(arg2);
+        }
+
+        protected virtual SquareMatrix<T> Sum(SquareMatrix<T> arg2)
+        {
+            T[][] result = new T[Order][];
+            for (int i = 0; i < Order; i++)
+            {
+                result[i] = new T[Order];
+            }
+            for (int i = 0; i < Order; i++)
+            {
+                for (int j = 0; j < Order; j++)
+                {
+                    result[i][j] = (dynamic)this[i,j] + arg2[i, j];
+                }
+            }
+
+            return new SMatrix<T>(result);
         }
 
         public virtual T this[int row, int col]

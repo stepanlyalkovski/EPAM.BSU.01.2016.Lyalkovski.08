@@ -1,4 +1,7 @@
-﻿namespace Task1
+﻿using System.Runtime.CompilerServices;
+using Task1.MatrixHierarchy;
+
+namespace Task1
 {
     public class SumMatrixVisitor<T> : IMatrixVisitor<T>
     {
@@ -11,7 +14,7 @@
 
         public void VisitS(SMatrix<T> sMatrix)
         {
-            
+            throw new System.NotImplementedException();
         }
 
         public void VisitDiagonal(DiagonalMatrix<T> dMatrix)
@@ -21,10 +24,10 @@
 
         public void VisitSymmetric(SymmetricMatrix<T> symMatrix)
         {
-            throw new System.NotImplementedException();
+            //symMatrix = Sum(symMatrix, (_matrix));
         }
 
-        private SquareMatrix<T> Sum(SquareMatrix<T> arg1, SquareMatrix<T> arg2)
+        private static SquareMatrix<T> Sum(SquareMatrix<T> arg1, SquareMatrix<T> arg2)
         {
             T[][] result = new T[arg1.Order][];
             for (int i = 0; i < arg1.Order; i++)
@@ -40,6 +43,18 @@
             }
 
            return new SMatrix<T>(result);
+        }
+
+        private static DiagonalMatrix<T> Sum(DiagonalMatrix<T> arg1, DiagonalMatrix<T> arg2)
+        {
+            T[] result = new T[arg1.Order];
+
+            for (int i = 0; i < arg1.Order; i++)
+            {
+                result[i] = (dynamic) arg1[i] + arg2[i];
+            }
+
+            return new DiagonalMatrix<T>(result);
         }
     }
 }

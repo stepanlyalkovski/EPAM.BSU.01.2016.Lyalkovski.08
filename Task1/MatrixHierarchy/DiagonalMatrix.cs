@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Task1
+namespace Task1.MatrixHierarchy
 {
     public class DiagonalMatrix<T> : SquareMatrix<T>
     {
@@ -23,6 +23,14 @@ namespace Task1
 
         }
 
+        public DiagonalMatrix(T[] diagonal) : base(diagonal.Length)
+        {
+            for (int i = 0; i < Order; i++)
+            {
+                _matrix[i] = diagonal[i];
+            }
+        }
+
         public T this[int index]
         {
             get
@@ -40,6 +48,11 @@ namespace Task1
                 _matrix[index] = value;
                 OnElementChanged(new MatrixChangedEventArgs<T>(index, index, value));
             }
+        }
+
+        public override void Accept(IMatrixVisitor<T> visitor)
+        {
+            visitor.VisitDiagonal(this);
         }
 
         public override T this[int row, int col]

@@ -1,4 +1,6 @@
-﻿namespace Task1
+﻿using Task1.MatrixHierarchy;
+
+namespace Task1
 {
     public interface IMatrixVisitor<T>
     {

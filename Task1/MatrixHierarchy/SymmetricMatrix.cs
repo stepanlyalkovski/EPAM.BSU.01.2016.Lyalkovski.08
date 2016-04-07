@@ -24,6 +24,11 @@ namespace Task1
 
         }
 
+        public override void Accept(IMatrixVisitor<T> visitor)
+        {
+            visitor.VisitSymmetric(this);
+        }
+
         public override T this[int row, int col]
         {
             get

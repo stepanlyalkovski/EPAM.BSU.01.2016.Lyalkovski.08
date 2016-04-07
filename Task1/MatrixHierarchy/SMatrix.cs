@@ -14,5 +14,10 @@
                 }
             }
         }
+
+        public override void Accept(IMatrixVisitor<T> visitor)
+        {
+            visitor.VisitS(this);
+        }
     }
 }
