@@ -79,6 +79,16 @@ namespace Task2
             return OrderTraversal(_root).Select(n => n.Value);
         }
 
+        public IEnumerable<T> PostOrderTraversal()
+        {
+            return PostOrderTraversal(_root).Select(n => n.Value);
+        }
+
+        public IEnumerable<T> InOrderTraversal()
+        {
+            return InOrderTraversal(_root).Select(n => n.Value);
+        }
+
         private static IEnumerable<Node> OrderTraversal(Node node)
         {
             if (node == null)
@@ -97,11 +107,6 @@ namespace Task2
             }
         }
 
-        public IEnumerable<T> PostOrderTraversal()
-        {
-            return PostOrderTraversal(_root).Select(n => n.Value);
-        }
-
         private static IEnumerable<Node> PostOrderTraversal(Node node)
         {
             if (node == null)
@@ -117,6 +122,26 @@ namespace Task2
             }
 
             yield return node;
+        }
+
+        private static IEnumerable<Node> InOrderTraversal(Node node)
+        {
+            if (node == null)
+                yield break;
+
+            foreach (var nodes in InOrderTraversal(node.Left))
+            {
+                yield return nodes;
+            }
+
+            yield return node;
+
+            foreach (var nodes in InOrderTraversal(node.Right))
+            {
+                yield return nodes;
+            }
+
+
         }
 
         private class Node
