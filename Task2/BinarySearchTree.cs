@@ -74,6 +74,28 @@ namespace Task2
             }
         }
 
+        public IEnumerable<T> OrderTraversal()
+        {
+            return OrderTraversal(_root).Select(n => n.Value);
+        }
+
+        private static IEnumerable<Node> OrderTraversal(Node node)
+        {
+            if (node == null)
+                yield break;
+
+            yield return node;
+
+            foreach (var nodes in OrderTraversal(node.Left))
+            {
+                yield return nodes;
+            }
+
+            foreach (var nodes in OrderTraversal(node.Right))
+            {
+                yield return nodes;
+            }
+        }
 
         private class Node
         {
