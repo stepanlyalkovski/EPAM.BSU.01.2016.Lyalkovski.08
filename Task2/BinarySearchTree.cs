@@ -33,21 +33,38 @@ namespace Task2
         {
             Node node = new Node(element);
                      
-            AddNode(node, _root);    
+            AddNode(ref node, ref _root);    
 
         }
 
-        private void AddNode(Node node, Node root)
+        private void AddNode(ref Node node, ref Node root)
         {
-           // if(root == null)
+            
+            if (root == null)
+                _root = node;
 
-            if (Comparer.Compare(node.Value, root.Value) > 0)
-                AddNode(node, root.Right);
+            while (root != null)
+            {
+                int cmp = Comparer.Compare(node.Value, root.Value);
 
-            else if (Comparer.Compare(node.Value, root.Value) < 0)
-                AddNode(node, root.Left);
-            else
-                throw new ArgumentException();
+                if (cmp > 0)
+                {
+                    if (root.Right == null)
+                        root.Right = node;
+
+                    root = root.Right;
+                }
+
+                else if (cmp < 0)
+                {
+                    if (root.Left == null)
+                        root.Left = node;
+
+                    root = root.Left;
+                }
+
+            }
+         
         }
 
 
