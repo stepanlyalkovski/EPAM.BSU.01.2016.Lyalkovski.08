@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DiagonalMatrixTests.cs" />
+    <Compile Include="DynamicVisitorTests.cs" />
     <Compile Include="MatrixTestSubscriber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

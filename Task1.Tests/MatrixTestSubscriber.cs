@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Threading;
+using Task1.MatrixHierarchy;
 
 namespace Task1.Tests
 {
@@ -7,7 +8,7 @@ namespace Task1.Tests
     {
         public bool WasCalled { get; private set; } = false;
 
-        public void Subscribe(SquareMatrix<T> matrix)
+        public void Subscribe(BaseSquareMatrix<T> matrix)
         {
             matrix.ElementChanged += EventGenerated;
         }

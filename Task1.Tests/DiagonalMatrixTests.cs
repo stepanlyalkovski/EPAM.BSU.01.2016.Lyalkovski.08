@@ -28,7 +28,7 @@ namespace Task1.Tests
         {
             var diagonalMatrix = new DiagonalMatrix<int>(diagonalMatrixInts);
 
-            Assert.IsTrue(SquareMatrix<int>.CompareToJaggedArray(diagonalMatrix, diagonalMatrixInts));
+            Assert.IsTrue(BaseSquareMatrix<int>.CompareToJaggedArray(diagonalMatrix, diagonalMatrixInts));
         }
 
         [Test]
@@ -56,6 +56,21 @@ namespace Task1.Tests
 
             Assert.IsTrue(subscriber.WasCalled);
         }
+
+        [Test]
+        public void DiagonalMatrixIndexer_PrintFullMatrix()
+        {
+            var diagonalMatrix = new DiagonalMatrix<int>(diagonalMatrixInts);
+            for (int i = 0; i < diagonalMatrix.Order; i++)
+            {
+                for (int j = 0; j < diagonalMatrix.Order; j++)
+                {
+                    Debug.Write(diagonalMatrix[i,j] + " ");
+                }
+            }
+        }
+
+
 
     }
 }
