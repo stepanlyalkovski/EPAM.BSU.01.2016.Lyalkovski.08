@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 
-namespace Task1
+namespace Task1.MatrixHierarchy
 {
-    public class SymmetricMatrix<T> : SquareMatrix<T>
+    public class SymmetricMatrix<T> : BaseSquareMatrix<T>
     {
         public SymmetricMatrix(T[][] matrix) : base(matrix)
         {
@@ -24,29 +24,17 @@ namespace Task1
 
         }
 
-        public override void Accept(IMatrixVisitor<T> visitor)
+        protected override T GetElement(int row, int col)
         {
-            visitor.VisitSymmetric(this);
+            return _matrix[GetIndex(row, col)];
         }
 
-        public override T this[int row, int col]
+        protected override void SetElement(int row, int col, T value)
         {
-            get
-            {
-                if (row > Order || col > Order)
-                    throw new ArgumentOutOfRangeException();
-
-                return _matrix[GetIndex(row, col)];
-            }
-            set
-            {
-                if (row > Order || col > Order)
-                    throw new ArgumentOutOfRangeException();
-
-                _matrix[GetIndex(row, col)] = value;
-                OnElementChanged(new MatrixChangedEventArgs<T>(row, col, value));
-            }
+            _matrix[GetIndex(row, col)] = value;
+            OnElementChanged(new MatrixChangedEventArgs<T>(row, col, value));
         }
+
 
         private static bool CheckTranspose(T[][] matrix)
         {

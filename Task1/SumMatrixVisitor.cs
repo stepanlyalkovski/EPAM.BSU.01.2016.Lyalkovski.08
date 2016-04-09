@@ -5,14 +5,14 @@ namespace Task1
 {
     public class SumMatrixVisitor<T> : IMatrixVisitor<T>
     {
-        private SquareMatrix<T> _matrix;
+        private BaseSquareMatrix<T> _matrix;
 
-        public SumMatrixVisitor(SquareMatrix<T> matrix)
+        public SumMatrixVisitor(BaseSquareMatrix<T> matrix)
         {
             _matrix = matrix;
         }
 
-        public void VisitS(SMatrix<T> sMatrix)
+        public void VisitS(SquareMatrix<T> squareMatrix)
         {
             throw new System.NotImplementedException();
         }
@@ -27,7 +27,7 @@ namespace Task1
             //symMatrix = Sum(symMatrix, (_matrix));
         }
 
-        private static SquareMatrix<T> Sum(SquareMatrix<T> arg1, SquareMatrix<T> arg2)
+        private static BaseSquareMatrix<T> Sum(BaseSquareMatrix<T> arg1, BaseSquareMatrix<T> arg2)
         {
             T[][] result = new T[arg1.Order][];
             for (int i = 0; i < arg1.Order; i++)
@@ -42,7 +42,7 @@ namespace Task1
                 }
             }
 
-           return new SMatrix<T>(result);
+           return new SquareMatrix<T>(result);
         }
 
         private static DiagonalMatrix<T> Sum(DiagonalMatrix<T> arg1, DiagonalMatrix<T> arg2)

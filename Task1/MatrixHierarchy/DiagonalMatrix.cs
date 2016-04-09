@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Task1.MatrixHierarchy
 {
-    public class DiagonalMatrix<T> : SquareMatrix<T>
+    public class DiagonalMatrix<T> : BaseSquareMatrix<T>
     {
         public DiagonalMatrix(T[][] matrix) : base(matrix)
         {
@@ -25,6 +25,8 @@ namespace Task1.MatrixHierarchy
 
         public DiagonalMatrix(T[] diagonal) : base(diagonal.Length)
         {
+            _matrix = new T[Order];
+
             for (int i = 0; i < Order; i++)
             {
                 _matrix[i] = diagonal[i];
@@ -50,33 +52,20 @@ namespace Task1.MatrixHierarchy
             }
         }
 
-        public override void Accept(IMatrixVisitor<T> visitor)
+        protected override T GetElement(int row, int col)
         {
-            visitor.VisitDiagonal(this);
+            return row == col ? _matrix[row] : default(T);
         }
 
-        public override T this[int row, int col]
+        protected override void SetElement(int row, int col, T value)
         {
-            get
-            {
-                if (row > Order || col > Order)
-                    throw new ArgumentOutOfRangeException();
+            if (row != col) return;
 
-                return row == col ? _matrix[row] : default(T);
-            }
-
-            // Liskov substitution principle: Would it be incorrect if I threw exception here?
-            set
-            {
-                if (row > Order || col > Order)
-                    throw new ArgumentOutOfRangeException();
-
-                if (row != col) return;
-
-                _matrix[row] = value;
-                OnElementChanged(new MatrixChangedEventArgs<T>(row, col, value));
-            }
+            _matrix[row] = value;
+            OnElementChanged(new MatrixChangedEventArgs<T>(row, col, value));
         }
+
+
 
         private static bool CheckDiagonal(T[][] matrix)
         {

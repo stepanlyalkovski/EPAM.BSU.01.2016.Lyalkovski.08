@@ -4,7 +4,7 @@ namespace Task1
 {
     public interface IMatrixVisitor<T>
     {
-        void VisitS(SMatrix<T> sMatrix);
+        void VisitS(SquareMatrix<T> squareMatrix);
         void VisitDiagonal(DiagonalMatrix<T> dMatrix);
         void VisitSymmetric(SymmetricMatrix<T> symMatrix);
     }
